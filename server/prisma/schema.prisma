@@ -1,0 +1,45 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Employee {
+  id                  Int       @id @default(autoincrement())
+  email               String    @unique
+  walletAddress       String
+  encryptedPrivateKey String
+  iv                  String
+  authTag             String
+  createdAt           DateTime  @default(now())
+  lastUsed            DateTime?
+  
+  @@map("employees")
+}
+
+model Admin {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+  
+  @@map("admins")
+}
+
+model AuditLog {
+  id            Int      @id @default(autoincrement())
+  action        String
+  employeeEmail String?
+  adminEmail    String?
+  ipAddress     String?
+  details       String?
+  timestamp     DateTime @default(now())
+  
+  @@map("audit_logs")
+}
