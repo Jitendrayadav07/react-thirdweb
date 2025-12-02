@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { createThirdwebClient } from 'thirdweb'
 import { ConnectButton, useActiveAccount, useActiveWallet } from 'thirdweb/react'
 import { inAppWallet, createWallet } from 'thirdweb/wallets'
+import { ethereum, polygon, avalanche, bsc, arbitrum, optimism, base } from 'thirdweb/chains'
 import './App.css'
 
 // Replace with your Thirdweb Client ID from https://thirdweb.com/dashboard
@@ -45,6 +46,7 @@ function App() {
             <ConnectButton
               client={client}
               wallets={wallets}
+              chains={[ethereum, polygon, avalanche, bsc, arbitrum, optimism, base]}
               theme="dark"
               connectModal={{
                 size: 'wide',
